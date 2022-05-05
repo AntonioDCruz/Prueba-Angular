@@ -1,4 +1,4 @@
 export interface Portfolio {
-  id: number
+  id?: number
   name: string
 }
