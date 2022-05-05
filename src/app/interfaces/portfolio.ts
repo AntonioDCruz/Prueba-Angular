@@ -1,4 +1,4 @@
-export interface Porftolio {
+export interface Portfolio {
   id: number
   name: string
 }
