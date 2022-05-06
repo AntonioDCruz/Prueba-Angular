@@ -22,15 +22,16 @@ export class PortfoliosLinesService {
     return this.http.post<PortfolioLine>(url, portfolioLine)
   }
 
-  updatePortfolioLine(
-    portfolioLine: PortfolioLine
-  ): Observable<PortfolioLine> {
+  updatePortfolioLine(portfolioLine: PortfolioLine): Observable<PortfolioLine> {
     const url = `${this.baseUrl}/portfolios/${portfolioLine.portfolioId}/lines/${portfolioLine.id}`
     return this.http.put<PortfolioLine>(url, portfolioLine)
   }
 
-  deletePortfolioLine(idPortfolio: number, idPorftolioLine: number): Observable<any>{
+  deletePortfolioLine(
+    idPortfolio: number,
+    idPorftolioLine: number
+  ): Observable<any> {
     const url = `${this.baseUrl}/portfolios/${idPortfolio}/lines/${idPorftolioLine}`
-    return this.http.delete<any>(url);
+    return this.http.delete<any>(url)
   }
 }

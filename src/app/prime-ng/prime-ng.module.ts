@@ -1,17 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import {TabMenuModule} from 'primeng/tabmenu';
-import {MenuItem} from 'primeng/api';
-
+import { TabMenuModule } from 'primeng/tabmenu'
+import { MenuItem } from 'primeng/api'
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ],
-  exports:[
-    TabMenuModule,
-  ]
+  imports: [CommonModule],
+  exports: [TabMenuModule]
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}
