@@ -16,7 +16,6 @@ export class MenuComponent implements OnInit {
       {label: 'Home', icon: 'pi pi-fw pi-home',},
       {label: 'Coins', icon: 'pi pi-fw pi-calendar'},
       {label: 'Portfolio', icon: 'pi pi-fw pi-pencil'},
-      {label: 'Portfolio Lines', icon: 'pi pi-fw pi-file'},
   ];
   }
 
