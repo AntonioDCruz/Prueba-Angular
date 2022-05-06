@@ -1,1 +1,44 @@
-<p>listado works!</p>
+<p-messages [value]="msgs"></p-messages>
+
+<div class="row m-2">
+  <div class="col">
+    <p-button
+      class="float-end"
+      label="New coin"
+      icon="pi pi-plus"
+      iconPos="right"
+      [routerLink]="['/coins/agregar']"
+    ></p-button>
+  </div>
+</div>
+
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
+
+<div class="row">
+  <div class="col-sm-12 col-md-4" *ngFor="let coin of coins">
+    <p-card [header]="coin.acronym" class="m-2">
+      {{ coin.name }}
+      <ng-template pTemplate="footer">
+        <p-button
+          label="Edit"
+          icon="pi pi-pencil"
+          iconPos="right"
+          styleClass="p-button-secondary"
+          [routerLink]="['/coins/editar', coin.id]"
+        ></p-button>
+        <p-button
+          (click)="confirm2(coin)"
+          icon="pi pi-times"
+          label="Delete"
+          iconPos="right"
+          styleClass="p-button-danger"
+          [style]="{ 'margin-left': '.5em' }"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

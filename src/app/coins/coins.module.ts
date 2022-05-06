@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CoinsRoutingModule } from './coins-routing.module';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { AgregarCoinComponent } from './pages/agregar-coin/agregar-coin.component';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AgregarCoinComponent } from './pages/agregar-coin/agregar-coin.componen
   ],
   imports: [
     CommonModule,
-    CoinsRoutingModule
+    CoinsRoutingModule,
+    PrimeNgModule
   ]
 })
 export class CoinsModule { }
