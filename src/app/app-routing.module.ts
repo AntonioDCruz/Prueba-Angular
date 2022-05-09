@@ -6,6 +6,11 @@ const routes: Routes = [
     path: 'coins',
     loadChildren: () =>
       import('./coins/coins.module').then((m) => m.CoinsModule)
+  },
+  {
+    path: 'portfolios',
+    loadChildren: () =>
+      import('./portfolios/portfolios.module').then((m) => m.PortfoliosModule)
   }
 ]
 
