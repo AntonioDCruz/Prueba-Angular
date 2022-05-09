@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Coin } from 'src/app/interfaces/coin'
 import { CoinsService } from '../../../services/coins.service'
 import { AcronymValidatorService } from '../../../shared/validator/acronym-validator.service'
 
@@ -16,7 +17,15 @@ export class AgregarCoinComponent implements OnInit {
       [Validators.required, Validators.pattern('[A-Z]{2,4}')],
       [this.acrValidator]
     ],
-    name: ['', [Validators.required, Validators.pattern('')]]
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(
+          '[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+.?(( |-)[a-zA-ZÀ-ÖØ-öø-ÿ0-9]+.?)*'
+        )
+      ]
+    ]
   })
 
   constructor(
@@ -42,15 +51,12 @@ export class AgregarCoinComponent implements OnInit {
   }
 
   get nameMsg() {
-    const errors = this.coinFormulario.get('acronym')?.errors
+    const errors = this.coinFormulario.get('name')?.errors
     if (errors?.['required']) {
       return 'Introduce un acronimo'
     } else if (errors?.['pattern']) {
       return 'Introduce un formato de adronimo valido'
-    } /* else if (errors?.['emailUsado']) {
-      return 'El Email introducido ya está en uso'
-    } */
-
+    }
     return ''
   }
 
@@ -66,5 +72,13 @@ export class AgregarCoinComponent implements OnInit {
       this.coinFormulario.markAllAsTouched()
       return
     }
+
+    const coin: Coin = {
+      acronym: this.coinFormulario.get('acronym')?.value,
+      name: this.coinFormulario.get('name')?.value
+    }
+
+    this.cs.postCoin(coin)
+      .subscribe(res => this.router.navigate(['/coins']));
   }
 }
