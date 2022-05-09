@@ -22,7 +22,6 @@ export class AcronymValidatorService implements AsyncValidator {
       .pipe(
         switchMap((res) => (acronyms = Object.keys(res.Data))),
         map((acronymList) => {
-          console.log(acronyms.includes(acronym))
           return acronyms.includes(acronym) ? null : { noExist: true }
         })
       )

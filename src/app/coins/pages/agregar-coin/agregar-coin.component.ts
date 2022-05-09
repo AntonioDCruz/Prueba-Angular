@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Message } from 'primeng/api/message'
+import { switchMap } from 'rxjs/operators'
 import { Coin } from 'src/app/interfaces/coin'
 import { CoinsService } from '../../../services/coins.service'
 import { AcronymValidatorService } from '../../../shared/validator/acronym-validator.service'
@@ -28,14 +30,34 @@ export class AgregarCoinComponent implements OnInit {
     ]
   })
 
+  coin: Coin | undefined;
+  msgs: Message[] = [];
+
   constructor(
     private cs: CoinsService,
     private fb: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private acrValidator: AcronymValidatorService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!this.router.url.includes('editar')){
+      return;
+    }
+
+    this.activatedRoute.params
+    .pipe(
+      switchMap( ({id}) => this.cs.getCoin(id) )
+    )
+    .subscribe( coin => {
+      this.coin = coin
+      this.coinFormulario.reset({
+        acronym: this.coin.acronym,
+        name: this.coin.name
+      })
+    });
+  }
 
   get acronymMsg() {
     const errors = this.coinFormulario.get('acronym')?.errors
@@ -73,12 +95,26 @@ export class AgregarCoinComponent implements OnInit {
       return
     }
 
-    const coin: Coin = {
-      acronym: this.coinFormulario.get('acronym')?.value,
-      name: this.coinFormulario.get('name')?.value
+    if (this.coin?.id) {
+      this.coin.acronym = this.coinFormulario.get('acronym')?.value
+      this.coin.name = this.coinFormulario.get('name')?.value
+      this.cs.updateCoin(this.coin)
+        .subscribe(res => {
+          this.addMessages(this.coin?.acronym!);
+        })
+    }else{
+      const coin: Coin = {
+        acronym: this.coinFormulario.get('acronym')?.value,
+        name: this.coinFormulario.get('name')?.value
+      }
+      this.cs.postCoin(coin)
+        .subscribe(res => this.router.navigate(['/coins']));
     }
-
-    this.cs.postCoin(coin)
-      .subscribe(res => this.router.navigate(['/coins']));
   }
+
+  addMessages(acronym: string) {
+    this.msgs = [
+        {severity:'success', summary:'Update Coin', detail:`${acronym} coin has been updated`},
+    ];
+}
 }

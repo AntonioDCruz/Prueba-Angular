@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { MessagesModule } from 'primeng/messages'
 import { InputTextModule } from 'primeng/inputtext'
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,8 @@ import { InputTextModule } from 'primeng/inputtext'
     ButtonModule,
     ConfirmDialogModule,
     MessagesModule,
-    InputTextModule
+    InputTextModule,
+    MessageModule
   ]
 })
 export class PrimeNgModule {}
