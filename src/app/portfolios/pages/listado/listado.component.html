@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12 col-md-4" *ngFor="let portfolio of portfolios">
+  <div class="col-sm-12 col-md-15" *ngFor="let portfolio of portfolios">
     <p-card [header]="portfolio.name" class="m-2">
       <app-lines [portfolioId]="portfolio.id!"></app-lines>
       <ng-template pTemplate="footer">

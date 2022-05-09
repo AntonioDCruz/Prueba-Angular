@@ -1,1 +1,5 @@
-<span>{{ nombre }} - </span>
+<span *ngIf="valor"
+  >{{ nombre }} - Current value (
+  {{ valor.EUR | currency: '€':'symbol-narrow':'1.2-4' }}
+  ) -
+</span>
