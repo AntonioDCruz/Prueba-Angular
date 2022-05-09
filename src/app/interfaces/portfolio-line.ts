@@ -1,6 +1,6 @@
 export interface PortfolioLine {
   id?: number
   portfolioId: number
-  coindId: number
+  coinId: number
   amount: number
 }

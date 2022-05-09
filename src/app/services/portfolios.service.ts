@@ -12,6 +12,12 @@ export class PortfoliosService {
 
   constructor(private http: HttpClient) {}
 
+  getAllPortfolioswithLines(): Observable<Portfolio[]> {
+    const url = `${this.baseUrl}/portfolios`
+    return this.http.get<Portfolio[]>(url)
+  }
+
+
   getPortfolio(id: number): Observable<Portfolio> {
     const url = `${this.baseUrl}/portfolios/${id}`
     return this.http.get<Portfolio>(url)

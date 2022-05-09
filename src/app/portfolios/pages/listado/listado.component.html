@@ -1,1 +1,35 @@
-<p>listado works!</p>
+<div class="row m-2">
+  <div class="col">
+    <p-button
+      class="float-end"
+      label="New coin"
+      icon="pi pi-plus"
+      iconPos="right"
+      [routerLink]="['/coins/agregar']"
+    ></p-button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-4" *ngFor="let portfolio of portfolios">
+    <p-card [header]="portfolio.name" class="m-2">
+      <app-lines [portfolioId]="portfolio.id!"></app-lines>
+      <ng-template pTemplate="footer">
+        <p-button
+          label="Edit"
+          icon="pi pi-pencil"
+          iconPos="right"
+          styleClass="p-button-secondary"
+          [routerLink]="['/portfolios/editar', portfolio.id]"
+        ></p-button>
+        <p-button
+          icon="pi pi-times"
+          label="Delete"
+          iconPos="right"
+          styleClass="p-button-danger"
+          [style]="{ 'margin-left': '.5em' }"
+        ></p-button>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
