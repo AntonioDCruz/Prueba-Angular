@@ -5,6 +5,8 @@ import { CoinsRoutingModule } from './coins-routing.module';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { AgregarCoinComponent } from './pages/agregar-coin/agregar-coin.component';
 import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
   imports: [
     CommonModule,
     CoinsRoutingModule,
-    PrimeNgModule
+    PrimeNgModule,
+    ReactiveFormsModule
   ]
 })
 export class CoinsModule { }

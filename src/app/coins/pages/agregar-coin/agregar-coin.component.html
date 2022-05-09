@@ -1,1 +1,63 @@
-<p>agregar-coin works!</p>
+<h1 class="text-center mt-3">New Coin</h1>
+
+<form [formGroup]="coinFormulario" (ngSubmit)="guardar()">
+  <div class="p-field m-3">
+    <label for="coinAcronym">Acronym</label>
+    <input
+      id="coinAcronym"
+      type="text"
+      formControlName="acronym"
+      aria-describedby="coinAcronym-help"
+      pInputText
+    />
+    <small id="coinAcronym-help" *ngIf="error('acronym')"
+      >{{ acronymMsg }}
+    </small>
+  </div>
+
+  <div class="p-field m-3">
+    <label for="coinName">Coin Name</label>
+    <input
+      id="coinName"
+      type="username"
+      formControlName="name"
+      aria-describedby="coinName-help"
+      pInputText
+    />
+    <small id="coinName-help" *ngIf="error('name')">{{ nameMsg }}</small>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <p-button
+        class="float-end"
+        label="Save"
+        icon="pi pi-check"
+        iconPos="right"
+        type="submit"
+      ></p-button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ coinFormulario.valid }}</pre>
+
+    <span>Pristine</span>
+    <pre>{{ coinFormulario.pristine }}</pre>
+
+    <span>Touched</span>
+    <pre>{{ coinFormulario.touched }}</pre>
+
+    <span>Value</span>
+    <pre>{{ coinFormulario.value | json }}</pre>
+
+    <span>Acronym</span>
+    <pre>{{ coinFormulario.controls?.['acronym']?.errors | json }}</pre>
+
+    <span>Nombre</span>
+    <pre>{{ coinFormulario.controls?.['nombre']?.errors | json }}</pre>
+  </div>
+</div>

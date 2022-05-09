@@ -17,7 +17,7 @@ import { PrimeNgModule } from './prime-ng/prime-ng.module';
     AppRoutingModule,
     HttpClientModule,
     PrimeNgModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
