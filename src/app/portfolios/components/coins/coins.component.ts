@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CoinsService } from '../../../services/coins.service';
 import { HttpClient } from '@angular/common/http';
 import { Value } from '../../../interfaces/value';
-import { switchMap } from 'rxjs/operators';
 import { map } from 'rxjs';
 
 @Component({
