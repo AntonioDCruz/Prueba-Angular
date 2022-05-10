@@ -27,11 +27,8 @@ export class PortfoliosLinesService {
     return this.http.put<PortfolioLine>(url, portfolioLine)
   }
 
-  deletePortfolioLine(
-    idPortfolio: number,
-    idPorftolioLine: number
-  ): Observable<any> {
-    const url = `${this.baseUrl}/portfolios/${idPortfolio}/lines/${idPorftolioLine}`
+  deletePortfolioLine(idPorftolioLine: number): Observable<any> {
+    const url = `${this.baseUrl}/lines/${idPorftolioLine}`
     return this.http.delete<any>(url)
   }
 }

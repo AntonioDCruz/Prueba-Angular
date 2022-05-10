@@ -1,3 +1,11 @@
+<p-messages [value]="msgs"></p-messages>
+
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
+
 <div class="line m-3" *ngFor="let line of lines; let i = index">
   <p>
     Line {{ i + 1 }} ->
@@ -13,5 +21,13 @@
     iconPos="right"
     styleClass="p-button-secondary p-button-sm"
     [routerLink]="['/portfolios/editarLine', line.portfolioId, line.id]"
+  ></p-button>
+  <p-button
+    (click)="confirm2(line)"
+    icon="pi pi-times"
+    label="Delete line"
+    iconPos="right"
+    styleClass="p-button-danger p-button-sm"
+    [style]="{ 'margin-left': '.5em' }"
   ></p-button>
 </div>

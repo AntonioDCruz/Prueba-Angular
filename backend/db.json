@@ -98,18 +98,6 @@
       "portfolioId": 2,
       "coinId": 7,
       "amount": 4.8
-    },
-    {
-      "portfolioId": "3",
-      "coinId": 3,
-      "amount": 1,
-      "id": 7
-    },
-    {
-      "portfolioId": "3",
-      "coinId": 8,
-      "amount": 10,
-      "id": 8
     }
   ]
 }

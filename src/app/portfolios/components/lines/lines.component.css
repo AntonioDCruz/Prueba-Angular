@@ -3,3 +3,12 @@
   gap: 20px;
   align-items: center;
 }
+
+@media (max-width: 600px) {
+  .line{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+  }
+}
