@@ -16,7 +16,7 @@ export class AgregarCoinComponent implements OnInit {
   coinFormulario: FormGroup = this.fb.group({
     acronym: [
       '',
-      [Validators.required, Validators.pattern('[A-Z]{2,4}')],
+      [Validators.required, Validators.pattern('[A-Z0-9]{2,4}')],
       [this.acrValidator]
     ],
     name: [

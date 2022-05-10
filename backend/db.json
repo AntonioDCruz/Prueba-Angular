@@ -85,19 +85,10 @@
       "amount": 9.2
     },
     {
-      "id": 4
-    },
-    {
       "id": 5,
       "portfolioId": 2,
       "coinId": 3,
       "amount": 5
-    },
-    {
-      "id": 6,
-      "portfolioId": 2,
-      "coinId": 7,
-      "amount": 4.8
     }
   ]
 }
