@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'primeng/api/message';
-import { switchMap } from 'rxjs/operators';
 import { PortfolioLine } from '../../../interfaces/portfolio-line';
 import { PortfoliosLinesService } from '../../../services/portfolios-lines.service';
 import { CoinsService } from '../../../services/coins.service';
 import { Coin } from 'src/app/interfaces/coin';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-agregar-line',
@@ -35,15 +33,29 @@ export class AgregarLineComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* if (!this.router.url.includes('editarLine')) {
+    if (this.router.url.includes('editarLine')) {
+      const portforlioLineId = Number(this.activatedRoute.snapshot.params['idLine'])
+      this.portfolioId = Number(this.activatedRoute.snapshot.params['idPortfolio'])
+      this.pls.getPortfolioLines(this.portfolioId)
+        .subscribe(lines => {
+          lines.forEach(line => {
+            if (line.id === portforlioLineId) {
+              this.portfolioLine = line
+              this.portfolioLineFormulario.reset({
+                coinId: this.portfolioLine.coinId,
+                amount: this.portfolioLine.amount
+              })
+            }
+          })
+        })
+    }else if (this.router.url.includes('agregarLine')) {
+      this.activatedRoute.params
+        .subscribe((({ id }) => this.portfolioId = Number(id)))
+    }else{
       return
-    } */
+    }
     this.cs.getAllCoins()
       .subscribe(coins => this.coins = coins )
-
-    this.activatedRoute.params
-      .subscribe((({ id }) => this.portfolioId = id))
-
   }
 
   get coinMsg() {
@@ -67,23 +79,35 @@ export class AgregarLineComponent implements OnInit {
       return
     }
 
+    if (this.portfolioLine?.id) {
+      this.portfolioLine.coinId = Number(this.portfolioLineFormulario.get('coinId')?.value)
+      this.portfolioLine.amount = this.portfolioLineFormulario.get('amount')?.value
+      console.log(this.portfolioLine);
 
-    const portfolioLine: PortfolioLine = {
-      portfolioId: this.portfolioId,
-      coinId: this.portfolioLineFormulario.get('coinId')?.value,
-      amount: this.portfolioLineFormulario.get('amount')?.value,
+      this.pls.updatePortfolioLine(this.portfolioLine)
+        .subscribe(res => {
+          this.addMessages();
+        })
+    }else{
+      const portfolioLine: PortfolioLine = {
+        portfolioId: Number(this.portfolioId),
+        coinId: Number(this.portfolioLineFormulario.get('coinId')?.value),
+        amount: this.portfolioLineFormulario.get('amount')?.value
+      }
+      this.pls
+        .postPortfolioLine(portfolioLine)
+        .subscribe((res) => this.router.navigate(['/portfolios']))
     }
-    this.pls
-      .postPortfolioLine(portfolioLine)
-      .subscribe((res) => this.router.navigate(['/portfolios']))
+
+
   }
 
-  addMessages(name: string) {
+  addMessages() {
     this.msgs = [
       {
         severity: 'success',
-        summary: 'Update Coin',
-        detail: `${name} portfolio has been updated`
+        summary: 'Update Line',
+        detail: `Portfolio line has been updated`
       }
     ]
   }

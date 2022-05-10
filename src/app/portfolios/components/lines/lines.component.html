@@ -1,4 +1,4 @@
-<div *ngFor="let line of lines; let i = index">
+<div class="line m-3" *ngFor="let line of lines; let i = index">
   <p>
     Line {{ i + 1 }} ->
     <app-coins
@@ -7,4 +7,11 @@
     ></app-coins>
     Amount ( {{ line.amount }} )
   </p>
+  <p-button
+    label="Edit line"
+    icon="pi pi-pencil"
+    iconPos="right"
+    styleClass="p-button-secondary p-button-sm"
+    [routerLink]="['/portfolios/editarLine', line.portfolioId, line.id]"
+  ></p-button>
 </div>

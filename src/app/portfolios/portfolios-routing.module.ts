@@ -25,7 +25,7 @@ const routes: Routes = [
         component: AgregarLineComponent
       },
       {
-        path: 'editarLine/:id',
+        path: 'editarLine/:idPortfolio/:idLine',
         component: AgregarLineComponent
       },
       {

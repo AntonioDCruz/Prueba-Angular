@@ -23,7 +23,7 @@ export class PortfoliosLinesService {
   }
 
   updatePortfolioLine(portfolioLine: PortfolioLine): Observable<PortfolioLine> {
-    const url = `${this.baseUrl}/portfolios/${portfolioLine.portfolioId}/lines/${portfolioLine.id}`
+    const url = `${this.baseUrl}/lines/${portfolioLine.id}`
     return this.http.put<PortfolioLine>(url, portfolioLine)
   }
 
