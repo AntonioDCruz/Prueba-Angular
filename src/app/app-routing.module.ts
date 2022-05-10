@@ -11,6 +11,10 @@ const routes: Routes = [
     path: 'portfolios',
     loadChildren: () =>
       import('./portfolios/portfolios.module').then((m) => m.PortfoliosModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'portfolios'
   }
 ]
 

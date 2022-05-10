@@ -49,6 +49,11 @@
       "id": 10,
       "acronym": "ETC",
       "name": "Ethereum classic"
+    },
+    {
+      "acronym": "PVT",
+      "name": "Precio Venta",
+      "id": 11
     }
   ],
   "portfolios": [
@@ -58,11 +63,7 @@
     },
     {
       "id": 2,
-      "name": "Portfolio 2"
-    },
-    {
-      "name": "Portfolio 3",
-      "id": 3
+      "name": "Portfolio 55"
     }
   ],
   "lines": [
@@ -85,10 +86,16 @@
       "amount": 9.2
     },
     {
-      "id": 5,
-      "portfolioId": 2,
-      "coinId": 3,
-      "amount": 5
+      "portfolioId": "2",
+      "coinId": 9,
+      "amount": 3,
+      "id": 4
+    },
+    {
+      "portfolioId": "2",
+      "coinId": 11,
+      "amount": 4,
+      "id": 5
     }
   ]
 }
