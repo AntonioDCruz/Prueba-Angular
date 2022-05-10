@@ -1,28 +1,54 @@
+<p-messages [value]="msgs"></p-messages>
+
 <div class="row m-2">
   <div class="col">
     <p-button
       class="float-end"
-      label="New coin"
+      label="New portfolio"
       icon="pi pi-plus"
       iconPos="right"
-      [routerLink]="['/coins/agregar']"
+      [routerLink]="['/portfolios/agregar']"
     ></p-button>
   </div>
 </div>
 
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
+
 <div class="row">
-  <div class="col-sm-12 col-md-15" *ngFor="let portfolio of portfolios">
+  <div
+    class="col-sm-12 col-md-15"
+    *ngFor="let portfolio of portfolios; let i = index"
+  >
     <p-card [header]="portfolio.name" class="m-2">
-      <app-lines [portfolioId]="portfolio.id!"></app-lines>
+      <h3 *ngIf="total[i] > 0">
+        Total: {{ total[i] | currency: '€':'symbol-narrow':'1.2-4' }}
+      </h3>
+      <app-lines
+        [portfolioId]="portfolio.id!"
+        (emitValue)="calcularValue($event)"
+      ></app-lines>
       <ng-template pTemplate="footer">
+        <p-button
+          label="New line"
+          icon="pi pi-plus-circle"
+          iconPos="right"
+          styleClass="p-button-warning"
+          [routerLink]="['/portfolios/agregarLine', portfolio.id]"
+        ></p-button>
         <p-button
           label="Edit"
           icon="pi pi-pencil"
           iconPos="right"
           styleClass="p-button-secondary"
+          [style]="{ 'margin-left': '.5em' }"
           [routerLink]="['/portfolios/editar', portfolio.id]"
         ></p-button>
         <p-button
+          (click)="confirm2(portfolio)"
           icon="pi pi-times"
           label="Delete"
           iconPos="right"

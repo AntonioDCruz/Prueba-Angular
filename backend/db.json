@@ -32,8 +32,8 @@
     },
     {
       "id": 7,
-      "acronym": "IOT",
-      "name": "IOTA"
+      "acronym": "42",
+      "name": "42 Coin"
     },
     {
       "id": 8,
@@ -61,8 +61,8 @@
       "name": "Portfolio 2"
     },
     {
-      "id": 3,
-      "name": "Portfolio 3"
+      "name": "Portfolio 3",
+      "id": 3
     }
   ],
   "lines": [
@@ -103,22 +103,10 @@
       "amount": 4.8
     },
     {
-      "id": 7,
-      "portfolioId": 3,
-      "coinId": 5,
-      "amount": 6
-    },
-    {
-      "id": 8,
-      "portfolioId": 3,
-      "coinId": 9,
-      "amount": 0.2
-    },
-    {
-      "id": 9,
-      "portfolioId": 3,
-      "coinId": 10,
-      "amount": 10
+      "portfolioId": "3",
+      "coinId": "4",
+      "amount": 1,
+      "id": 7
     }
   ]
 }

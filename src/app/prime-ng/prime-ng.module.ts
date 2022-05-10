@@ -8,6 +8,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { MessagesModule } from 'primeng/messages'
 import { InputTextModule } from 'primeng/inputtext'
 import {MessageModule} from 'primeng/message';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import {MessageModule} from 'primeng/message';
     ConfirmDialogModule,
     MessagesModule,
     InputTextModule,
-    MessageModule
+    MessageModule,
+    InputNumberModule
   ]
 })
 export class PrimeNgModule {}

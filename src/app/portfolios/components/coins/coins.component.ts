@@ -1,7 +1,9 @@
-import { Component, Input, OnInit, LOCALE_ID } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CoinsService } from '../../../services/coins.service';
 import { HttpClient } from '@angular/common/http';
 import { Value } from '../../../interfaces/value';
+import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-coins',
@@ -9,6 +11,8 @@ import { Value } from '../../../interfaces/value';
   styleUrls: ['./coins.component.css']
 })
 export class CoinsComponent implements OnInit {
+
+  @Output() emitValue = new EventEmitter<Value>();
 
   @Input() coinId!: number;
   nombre: string = '';
@@ -21,7 +25,12 @@ export class CoinsComponent implements OnInit {
     .subscribe(coin => {
       this.nombre = coin.name
       this.http.get<Value>(`https://min-api.cryptocompare.com/data/price?fsym=${coin.acronym}&tsyms=EUR`)
-        .subscribe((res) => this.valor = res);
+      .pipe(
+        map(res => this.valor = res)
+      )
+      .subscribe((res) => {
+        this.emitValue.emit(this.valor);
+      });
     })
   }
 

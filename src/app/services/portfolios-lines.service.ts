@@ -18,7 +18,7 @@ export class PortfoliosLinesService {
   }
 
   postPortfolioLine(portfolioLine: PortfolioLine): Observable<PortfolioLine> {
-    const url = `${this.baseUrl}/portfolios/${portfolioLine.portfolioId}/lines`
+    const url = `${this.baseUrl}/portfolios/${portfolioLine.portfolioId}/lines/`
     return this.http.post<PortfolioLine>(url, portfolioLine)
   }
 

@@ -1,0 +1,52 @@
+<p-messages [value]="msgs"></p-messages>
+<h1 class="text-center mt-3">
+  {{ portfolio !== undefined ? 'Edit' : 'New' }} Portfolio
+</h1>
+
+<form [formGroup]="portfolioFormulario" (ngSubmit)="guardar()">
+  <div class="p-field m-3">
+    <label for="portfolioName">Portfolio Name</label>
+    <input
+      id="portfolioName"
+      type="text"
+      formControlName="name"
+      aria-describedby="portfolioName-help"
+      pInputText
+    />
+    <small id="portfolioName-help" *ngIf="error('name')">{{ nameMsg }}</small>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <p-button
+        class="float-end"
+        label="Save"
+        icon="pi pi-check"
+        iconPos="right"
+        type="submit"
+      ></p-button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ portfolioFormulario.valid }}</pre>
+
+    <span>Pristine</span>
+    <pre>{{ portfolioFormulario.pristine }}</pre>
+
+    <span>Touched</span>
+    <pre>{{ portfolioFormulario.touched }}</pre>
+
+    <span>Value</span>
+    <pre>{{ portfolioFormulario.value | json }}</pre>
+
+    <span>Acronym</span>
+    <pre>{{ portfolioFormulario.controls?.['acronym']?.errors | json }}</pre>
+
+    <span>Nombre</span>
+    <pre>{{ portfolioFormulario.controls?.['name']?.errors | json }}</pre>
+  </div>
+</div>
