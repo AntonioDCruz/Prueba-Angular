@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Message } from 'primeng/api/message';
-import { PortfolioLine } from '../../../interfaces/portfolio-line';
-import { PortfoliosLinesService } from '../../../services/portfolios-lines.service';
-import { CoinsService } from '../../../services/coins.service';
-import { Coin } from 'src/app/interfaces/coin';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Message } from 'primeng/api/message'
+import { PortfolioLine } from '../../../interfaces/portfolio-line'
+import { PortfoliosLinesService } from '../../../services/portfolios-lines.service'
+import { CoinsService } from '../../../services/coins.service'
+import { Coin } from 'src/app/interfaces/coin'
 
 @Component({
   selector: 'app-agregar-line',
@@ -13,15 +13,14 @@ import { Coin } from 'src/app/interfaces/coin';
   styleUrls: ['./agregar-line.component.css']
 })
 export class AgregarLineComponent implements OnInit {
-
   portfolioLineFormulario: FormGroup = this.fb.group({
-    coinId: [ , [Validators.required]],
-    amount: [ , [Validators.required, Validators.min(0)]]
+    coinId: [, [Validators.required]],
+    amount: [, [Validators.required, Validators.min(0)]]
   })
 
   portfolioLine: PortfolioLine | undefined
   portfolioId!: number
-  coins: Coin[] = [];
+  coins: Coin[] = []
   msgs: Message[] = []
 
   constructor(
@@ -29,39 +28,52 @@ export class AgregarLineComponent implements OnInit {
     private fb: FormBuilder,
     private cs: CoinsService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     if (this.router.url.includes('editarLine')) {
-      const portforlioLineId = Number(this.activatedRoute.snapshot.params['idLine'])
-      this.portfolioId = Number(this.activatedRoute.snapshot.params['idPortfolio'])
-      this.pls.getPortfolioLines(this.portfolioId)
-        .subscribe(lines => {
-          lines.forEach(line => {
-            if (line.id === portforlioLineId) {
-              this.portfolioLine = line
-              this.portfolioLineFormulario.reset({
-                coinId: this.portfolioLine.coinId,
-                amount: this.portfolioLine.amount
-              })
-            }
-          })
+      const portforlioLineId = Number(
+        this.activatedRoute.snapshot.params['idLine']
+      )
+      this.portfolioId = Number(
+        this.activatedRoute.snapshot.params['idPortfolio']
+      )
+      this.pls.getPortfolioLines(this.portfolioId).subscribe((lines) => {
+        lines.forEach((line) => {
+          if (line.id === portforlioLineId) {
+            this.portfolioLine = line
+            this.portfolioLineFormulario.reset({
+              coinId: this.portfolioLine.coinId,
+              amount: this.portfolioLine.amount
+            })
+          }
         })
-    }else if (this.router.url.includes('agregarLine')) {
-      this.activatedRoute.params
-        .subscribe((({ id }) => this.portfolioId = Number(id)))
-    }else{
+      })
+    } else if (this.router.url.includes('agregarLine')) {
+      this.activatedRoute.params.subscribe(
+        ({ id }) => (this.portfolioId = Number(id))
+      )
+    } else {
       return
     }
-    this.cs.getAllCoins()
-      .subscribe(coins => this.coins = coins )
+    this.cs.getAllCoins().subscribe((coins) => (this.coins = coins))
   }
 
   get coinMsg() {
     const errors = this.portfolioLineFormulario.get('coinId')?.errors
     if (errors?.['required']) {
       return 'Seleccione una moneda'
+    }
+    return ''
+  }
+
+  get amountMsg() {
+    const errors = this.portfolioLineFormulario.get('amount')?.errors
+    if (errors?.['required']) {
+      return 'Introduce una cantidad'
+    } else if (errors?.['min']) {
+      return 'La cantidad no puede ser inferior a cero'
     }
     return ''
   }
@@ -80,15 +92,17 @@ export class AgregarLineComponent implements OnInit {
     }
 
     if (this.portfolioLine?.id) {
-      this.portfolioLine.coinId = Number(this.portfolioLineFormulario.get('coinId')?.value)
-      this.portfolioLine.amount = this.portfolioLineFormulario.get('amount')?.value
-      console.log(this.portfolioLine);
+      this.portfolioLine.coinId = Number(
+        this.portfolioLineFormulario.get('coinId')?.value
+      )
+      this.portfolioLine.amount =
+        this.portfolioLineFormulario.get('amount')?.value
+      console.log(this.portfolioLine)
 
-      this.pls.updatePortfolioLine(this.portfolioLine)
-        .subscribe(res => {
-          this.addMessages();
-        })
-    }else{
+      this.pls.updatePortfolioLine(this.portfolioLine).subscribe((res) => {
+        this.addMessages()
+      })
+    } else {
       const portfolioLine: PortfolioLine = {
         portfolioId: Number(this.portfolioId),
         coinId: Number(this.portfolioLineFormulario.get('coinId')?.value),
@@ -98,8 +112,6 @@ export class AgregarLineComponent implements OnInit {
         .postPortfolioLine(portfolioLine)
         .subscribe((res) => this.router.navigate(['/portfolios']))
     }
-
-
   }
 
   addMessages() {
@@ -111,6 +123,4 @@ export class AgregarLineComponent implements OnInit {
       }
     ]
   }
-
-
 }

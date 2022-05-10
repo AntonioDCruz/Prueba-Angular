@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Message } from 'primeng/api/message';
-import { switchMap } from 'rxjs/operators';
-import { Portfolio } from '../../../interfaces/portfolio';
-import { PortfoliosService } from '../../../services/portfolios.service';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Message } from 'primeng/api/message'
+import { switchMap } from 'rxjs/operators'
+import { Portfolio } from '../../../interfaces/portfolio'
+import { PortfoliosService } from '../../../services/portfolios.service'
 
 @Component({
   selector: 'app-agregar-portfolio',
@@ -12,7 +12,6 @@ import { PortfoliosService } from '../../../services/portfolios.service';
   styleUrls: ['./agregar-portfolio.component.css']
 })
 export class AgregarPortfolioComponent implements OnInit {
-
   portfolioFormulario: FormGroup = this.fb.group({
     name: [
       '',
@@ -32,7 +31,7 @@ export class AgregarPortfolioComponent implements OnInit {
     private ps: PortfoliosService,
     private fb: FormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -97,5 +96,4 @@ export class AgregarPortfolioComponent implements OnInit {
       }
     ]
   }
-
 }

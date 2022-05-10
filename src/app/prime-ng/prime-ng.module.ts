@@ -14,14 +14,14 @@ import {InputNumberModule} from 'primeng/inputnumber';
   declarations: [],
   imports: [CommonModule],
   exports: [
-    TabMenuModule,
-    CardModule,
     ButtonModule,
+    CardModule,
     ConfirmDialogModule,
-    MessagesModule,
+    InputNumberModule,
     InputTextModule,
+    MessagesModule,
     MessageModule,
-    InputNumberModule
+    TabMenuModule,
   ]
 })
 export class PrimeNgModule {}
